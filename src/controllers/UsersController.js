@@ -1,10 +1,27 @@
+/* O Controller é a camada responsavel por processar as requisições da aplicação. 
+É no controller que temos as regras de négocio responsavel por executar as solicitações 
+do usuário. */
+
 const { hash, compare } = require('bcryptjs')
 const AppError = require('../utils/AppError');
 
 const sqliteConnection = require('../database/sqlite');
 
+/* Usamos a estrutura de classe para criar um controller pois ela permite criar várias  funções 
+seguindo o padrão de ter no máximo cinco métodos/funções */
 class UsersController {
   
+  /**
+   * index - GET para listar vários registros;
+   * show - GET para exibir um registro especifico;
+   * create - POST para criar um registro;
+   * update - PUT para atualizar um registro;
+   * delete - DELETE para remover um registro.
+   * 
+   * Se precisar criar mais que cinco métodos, crie um controller semparado.
+   */
+
+  // funcionalidade que cria um usuário
   async create(request, response) {
 
     const { name, email, password } = request.body;
@@ -24,6 +41,7 @@ class UsersController {
       [name, email, hashedPassword]
     )
 
+    // Exemplo onde além do retorno de resposta em json, é retornado o status code de 201 para criação.
     return response.status(201).json();
   };
 

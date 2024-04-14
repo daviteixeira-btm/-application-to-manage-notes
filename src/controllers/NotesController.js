@@ -3,7 +3,10 @@ const knex = require("../database/knex");
 class NotesController {
 
     async create(request, response){
+
+        // É possivel pegar essas informações a partir do envio no corpo da requisição
         const { title, description, tags, links } = request.body;
+
         const { user_id } = request.params;
 
         const [note_id] = await knex("notes").insert({
@@ -31,11 +34,13 @@ class NotesController {
 
         await knex("tags").insert(tagsInsert);
 
+        // Devolve as informações em formato de json
         response.json();
     }
 
     async show(request, response){
         
+        // Desestruturação do 'id' atravez dos parametros da url por meio do request. 
         const { id } = request.params;
 
         const note = await knex("notes").where({ id }).first();
@@ -60,6 +65,7 @@ class NotesController {
 
     async index(request, response){
 
+        // Valores desestruturados obtidos atravez da query params, por meio do request.
         const { title, user_id, tags } = request.query;
 
         let notes;
