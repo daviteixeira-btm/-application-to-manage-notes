@@ -2,9 +2,11 @@
 É no controller que temos as regras de négocio responsavel por executar as solicitações 
 do usuário. */
 
+/* Importação do 'hash' que é a função que vai gerar a criptografia */
 const { hash, compare } = require('bcryptjs')
 const AppError = require('../utils/AppError');
 
+// Conexão com o banco de dados
 const sqliteConnection = require('../database/sqlite');
 
 /* Usamos a estrutura de classe para criar um controller pois ela permite criar várias  funções 
@@ -26,16 +28,21 @@ class UsersController {
 
     const { name, email, password } = request.body;
 
+    // faz a conexão com o banco de dados
     const database = await sqliteConnection();
 
+    // Verifica se o email do usuario já existe
     const checkUserExists = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
     if (checkUserExists){
+      // Excessão caso o usuário exista
       throw new AppError("Este e-mail já está em uso.");
     }
 
+
     const hashedPassword = await hash(password, 8);
 
+    // Insere os dados na tabela do usuário
     await database.run(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]

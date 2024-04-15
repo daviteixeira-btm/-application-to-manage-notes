@@ -3,6 +3,7 @@
 // biblioteca para lidar com os erros do servidor e do cliente
 require("express-async-errors");
 
+// Importação dos arquivos de Migrations
 const migrationsRun = require("./database/sqlite/migrations");
 
 // Importação do AppError para tratamento de exceções
@@ -14,6 +15,7 @@ const express = require("express");
 // Importação do arquivo index com o conjunto de rotas da API
 const routes = require("./routes");
 
+// executando a conexão com o banco de dados atraves das migrations
 migrationsRun();
 
 // Iniciando o express
