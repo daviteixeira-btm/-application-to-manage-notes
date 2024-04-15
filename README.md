@@ -79,6 +79,7 @@ Para se comunicar com uma API é necessario seguir alguns padrões. É aí que e
 - [Express](https://expressjs.com/pt-br/)
 - [Express Async Erros](https://www.npmjs.com/package/express-async-errors)
 - [Nodemom](https://nodemon.io/)
+- [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
 
 <a id="Aplicacao"></a>
 ## 🚀 Aplicação
@@ -96,6 +97,12 @@ Para se comunicar com uma API é necessario seguir alguns padrões. É aí que e
 ```
  npm run dev
 ```
+
+### ```Estrutura do Banco de Dados```
+
+<div align="center">
+  <img src="./assets/estrutura-banco-de-dados.png" />
+</div>
 
 ### ```Insomnia```
 
