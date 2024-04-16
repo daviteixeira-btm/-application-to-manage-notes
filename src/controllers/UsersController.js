@@ -39,7 +39,7 @@ class UsersController {
       throw new AppError("Este e-mail já está em uso.");
     }
 
-
+    // aqui, na função passamos a senha e o salto, que é o fator de complexidade da senha
     const hashedPassword = await hash(password, 8);
 
     // Insere os dados na tabela do usuário
