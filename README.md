@@ -80,6 +80,7 @@ Para se comunicar com uma API é necessario seguir alguns padrões. É aí que e
 - [Express Async Erros](https://www.npmjs.com/package/express-async-errors)
 - [Nodemom](https://nodemon.io/)
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [Knex](https://knexjs.org/)
 
 <a id="Aplicacao"></a>
 ## 🚀 Aplicação
@@ -98,11 +99,48 @@ Para se comunicar com uma API é necessario seguir alguns padrões. É aí que e
  npm run dev
 ```
 
+### Em um novo terminal, use esse comando para rodar as migrations
+```
+  npm run migrate
+```
+
 ### ```Estrutura do Banco de Dados```
 
 <div align="center">
   <img src="./assets/estrutura-banco-de-dados.png" />
 </div>
+
+### ```Query Builder```
+
+Os bancos de dados relacionais utilizam o mesmo padrão de linguagem de consulta que é o SQL, porém é natural que de um banco de dados para outro, mesmo que sendo relacional, tenha algumas diferenças. Então, a gente preciso adotar uma estratégia para gerar códigos SQL de forma independente do banco. E é aí que entra a Query Builder.
+
+Um Querr Builder é um construtor de consulta que permite gerar instruções SQL de maneira independente do banco de dados que for utilizando.
+
+O que a Query Builder faz é gerar o código SQL para o banco de dados utilizado. Ao invés de escrever o código SQL específico para o banco, é escrito utilizando a síntese do Query Builder. A vantagem é que, caso seja necessario fazer um select, um insert, um update, utilizamos o Query Builder para gerar o código SQL para o banco de dados.
+
+Outra vantagem é que o Query Builder vai gerar um código performático, deixando as consultas bem estruturadas para o banco de dados utilizado. Nesse projeto utilizamos o Query Builder <a href="https://knexjs.org/"/>Knex.js</a>.
+
+### ```Migrations```
+
+As migrations são uma forma de versionar o nosso banco de dados, elas trabalham na manipulação da base de dados, seja alterando, criando ou removendo informações.
+
+Para criar uma migration, usamos o camando:
+
+```
+ npx knex migrate:make nome_da_migration
+```
+
+Para executar a migration, para criar ela dentro do banco de dados, usamos o comando:
+
+```
+ npx knex migrate:latest
+```
+
+Porém, temos um script expecifico para isso, basta executar:
+
+```
+ npm run migrate
+```
 
 ### ```Insomnia```
 
@@ -137,6 +175,50 @@ A variável de ambiente que é criada dentro de uma pasta só é disponivel para
 <div align="center">
   <img src="./assets/variavel-de-ambiente-4.png" />
 </div>
+
+<br />
+
+```Para testar as funcionalidades no Insomnia```
+
+### Para testar a criação de um usuário. Crie uma pasta Users, faça uma requisição do tipo 'POST' chamada 'Create', com a url: localhost:3333/users e escolha o 'JSON' como corpo da requisição. Desta forma você pode criar um usuário, como no exemplo abaixo:
+```
+{
+	"name": "Davi",
+	"email": "davi@email.com",
+	"password": "123"
+}
+```
+
+### Para testar a atualização de um usuário, na pasta Users, faça uma requisição do tipo 'PUT' chamada 'Update', com a url: localhost:3333/users/1 e escolha o 'JSON' como corpo da requisição. Desta forma você pode atualizar o usuário (atualize o id de acordo com o user), como no exemplo abaixo:
+```
+{
+	"name": "Davi Teixeira",
+	"email": "davi@email.com",
+	"password": "1234",
+	"old_password": "123"
+}
+```
+
+### Para testar a criação de uma nota de usuário. Crie uma pasta Notes, faça uma requisição do tipo 'POST' chamada 'Create', com a url: localhost:3333/notes/1 e escolha o 'JSON' como corpo da requisição. Desta forma você pode criar uma nota para o usuário com id = 1, como no exemplo abaixo:
+```
+{
+	"title":"Introdução Nodejs.",
+	"description": "Essa é uma nota de exemplo.",
+	"tags": ["node", "express"],
+	"links": ["link1", "link2"]
+}
+```
+
+### Para testar a rota que exibe todas as notas de um usuário, faça uma requisição do tipo 'GET' chamada 'Index', com a url: localhost:3333/notes/ e nas query params adicione os valores de id, title e tags. Como no exemplo abaixo:
+```
+http://localhost:3333/notes?title=node&user_id=1&tags=node
+```
+
+### Para testar a funcionalidade que mostra uma nota expecifica, na pasta Notes, faça uma requisição do tipo 'GET' chamada 'Show', com a url: localhost:3333/notes/1. Desta forma você pode ver a nota do usuário 1 (atualize o id de acordo com o user).
+
+### Para testar a funcionalidade de deletar uma nota, na pasta Notes, faça uma requisição do tipo 'DELETE' chamada 'Delete', com a url: localhost:3333/notes/1. Desta forma você deleta as notas do usuário 1 (atualize o id de acordo com o user).
+
+### Para testar a funcionalidade que mostra as tags da nota de um usuário, crie uma pasta Tags, faça uma requisição do tipo 'GET' chamada 'Index', com a url: localhost:3333/tags/1. Desta forma você pode ver as tags do usuário 1 (atualize o id de acordo com o user).
 
 <a id="Licensa"></a>
 ## 📝 License
