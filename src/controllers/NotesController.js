@@ -8,7 +8,7 @@ class NotesController {
         // É possivel pegar essas informações a partir do envio no corpo da requisição
         const { title, description, tags, links } = request.body;
 
-        const { user_id } = request.params;
+        const user_id = request.user.id;
 
         // Aqui inserimos a nota
         const [note_id] = await knex("notes").insert({
@@ -83,7 +83,9 @@ class NotesController {
     async index(request, response){
 
         // Valores desestruturados obtidos atravez da query params, por meio do request.
-        const { title, user_id, tags } = request.query;
+        const { title, tags } = request.query;
+
+        const user_id = request.user.id;
 
         let notes;
 

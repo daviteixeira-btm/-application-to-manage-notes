@@ -6,6 +6,9 @@ const { Router } = require('express');
 // importando o controller de tags
 const TagsController = require('../controllers/TagsController');
 
+// Importar o middleware de autenticação
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
 // Atribuimos o Router a variavel
 const tagsRoutes = Router();
 
@@ -13,7 +16,7 @@ const tagsRoutes = Router();
 const tagsController = new TagsController();
 
 // redirecionamento do método index para o tagsController
-tagsRoutes.get('/:user_id', tagsController.index);
+tagsRoutes.get('/', ensureAuthenticated, tagsController.index);
 
 // Expondo as rotas de tags
 module.exports = tagsRoutes;

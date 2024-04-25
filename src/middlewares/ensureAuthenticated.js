@@ -12,7 +12,7 @@ function ensureAuthenticated(request, response, next){
     }
 
     // Pegar a string do header e passar ela para dentro de uma variavel no vetor usando o split
-    const [ , token] = authHeader.split(" ");
+    const [, token] = authHeader.split(" ");
 
     // Verificar se é um token válido
     try {

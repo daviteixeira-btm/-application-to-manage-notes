@@ -6,15 +6,21 @@ const { Router } = require('express');
 // importando o controller de notas
 const NotesController = require('../controllers/NotesController');
 
+// Importar o middleware de autenticação
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
 // Atribuimos o Router a variavel
 const notesRoutes = Router();
 
 // Criando uma nova instância em memoria para a classe
 const notesController = new NotesController();
 
+// Usar o middleware de autenticação para todas as rotas
+notesRoutes.use(ensureAuthenticated);
+
 // redirecionamento dos métodos para o notesController
 notesRoutes.get('/', notesController.index);
-notesRoutes.post('/:user_id', notesController.create);
+notesRoutes.post('/', notesController.create);
 notesRoutes.get('/:id', notesController.show);
 notesRoutes.delete('/:id', notesController.delete);
 
