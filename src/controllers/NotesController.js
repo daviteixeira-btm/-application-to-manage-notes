@@ -43,7 +43,7 @@ class NotesController {
         await knex("tags").insert(tagsInsert);
 
         // Devolve as informações em formato de json
-        response.json();
+        return response.json();
     }
 
     // Função para exibir uma nota
