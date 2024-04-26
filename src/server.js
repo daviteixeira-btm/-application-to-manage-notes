@@ -9,6 +9,9 @@ const migrationsRun = require("./database/sqlite/migrations");
 // Importação do AppError para tratamento de exceções
 const AppError = require("./utils/AppError");
 
+// Importando as configurações de upload
+const uploadConfig = require("./configs/upload");
+
 // Importando todas as funcionalidades do express
 const express = require("express");
 
@@ -24,6 +27,9 @@ const app = express();
 /* Aqui dizemos para o node que as informações 
 que vão vir no corpo da requisição vão ser em formato de json. */
 app.use(express.json());
+
+// Função para servir metodos estaticos para mostrar a imagem
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 
 // Aqui usamos as rotas da aplicação.
 app.use(routes);
