@@ -12,6 +12,12 @@ const uploadConfig = require("../configs/upload");
 // Importando o controller de usuário
 const UsersController = require('../controllers/UsersController');
 
+// Importando o controller de userAvatar
+const UserAvatarController = require("../controllers/UserAvatarController");
+
+// Importar o middleware de autenticação
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
 // Atribuimos o Router a variavel
 const usersRoutes = Router();
 
@@ -21,8 +27,8 @@ const upload = multer(uploadConfig.MULTER);
 // Criando uma nova instância em memoria para a classe
 const usersController = new UsersController();
 
-// Importar o middleware de autenticação
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+// Inicializamos uma nova instância em memoria
+const userAvatarController = new UserAvatarController();
 
 // redirecionamento do método create para o usersController
 usersRoutes.post('/', usersController.create);
@@ -37,10 +43,7 @@ usersRoutes.put('/', ensureAuthenticated, usersController.update);
 // Aqui vai ser a rota para acessar onde será armazenados os aquivos de imagem
 
 // o single() é para carregar apenas um arquivo pelo nome do campo
-usersRoutes.patch("/avatar", ensureAuthenticated, upload.single("avatar"), (request, response) => {
-    console.log(request.file.filename);
-    response.json();
-});
+usersRoutes.patch("/avatar", ensureAuthenticated, upload.single("avatar"), userAvatarController.update);
 
 // Expondo as rotas do usuário
 module.exports = usersRoutes;
