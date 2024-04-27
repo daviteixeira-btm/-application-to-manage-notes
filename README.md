@@ -124,7 +124,8 @@ A variável de ambiente que é criada dentro de uma pasta só é disponivel para
 
 ### ```Para testar as funcionalidades no Insomnia```
 
-#### Para testar a criação de um usuário. Crie uma pasta Users, faça uma requisição do tipo 'POST' chamada 'Create', com a url: localhost:3333/users e escolha o 'JSON' como corpo da requisição. Desta forma você pode criar um usuário, como no exemplo abaixo:
+Para testar a criação de um usuário. Crie uma pasta <b>Users</b>, faça uma requisição do tipo <b>'POST'</b> chamada <b>'Create'</b>, com a url: <b>localhost:3333/users</b> e escolha o <b>'JSON'</b> como corpo da requisição. Desta forma você pode criar um usuário, como no exemplo abaixo:
+
 ```
 {
 	"name": "Davi",
@@ -133,7 +134,8 @@ A variável de ambiente que é criada dentro de uma pasta só é disponivel para
 }
 ```
 
-#### Para testar a atualização de um usuário, na pasta Users, faça uma requisição do tipo 'PUT' chamada 'Update', com a url: localhost:3333/users/1 e escolha o 'JSON' como corpo da requisição. Desta forma você pode atualizar o usuário (atualize o id de acordo com o user), como no exemplo abaixo:
+Para testar a atualização de um usuário, na pasta <b>Users</b>, faça uma requisição do tipo <b>'PUT'</b> chamada <b>'Update'</b>, com a url: <b>localhost:3333/users/1</b> e escolha o <b>'JSON'</b> como corpo da requisição. Desta forma você pode atualizar o usuário (atualize o id de acordo com o user), como no exemplo abaixo:
+
 ```
 {
 	"name": "Davi Teixeira",
@@ -143,7 +145,8 @@ A variável de ambiente que é criada dentro de uma pasta só é disponivel para
 }
 ```
 
-#### Para testar a criação de uma nota de usuário. Crie uma pasta Notes, faça uma requisição do tipo 'POST' chamada 'Create', com a url: localhost:3333/notes/1 e escolha o 'JSON' como corpo da requisição. Desta forma você pode criar uma nota para o usuário com id = 1, como no exemplo abaixo:
+Para testar a criação de uma nota de usuário. Crie uma pasta <b>Notes</b>, faça uma requisição do tipo <b>'POST'</b> chamada <b>'Create'</b>, com a url: <b>localhost:3333/notes/1</b> e escolha o <b>'JSON'</b> como corpo da requisição. Desta forma você pode criar uma nota para o usuário com id = 1, como no exemplo abaixo:
+
 ```
 {
 	"title":"Introdução Nodejs.",
@@ -153,16 +156,17 @@ A variável de ambiente que é criada dentro de uma pasta só é disponivel para
 }
 ```
 
-#### Para testar a rota que exibe todas as notas de um usuário, faça uma requisição do tipo 'GET' chamada 'Index', com a url: localhost:3333/notes/ e nas query params adicione os valores de id, title e tags. Como no exemplo abaixo:
+Para testar a rota que exibe todas as notas de um usuário, faça uma requisição do tipo <b>'GET'</b> chamada <b>'Index'</b>, com a url: <b>localhost:3333/notes/</b> e nas query params adicione os valores de id, title e tags. Como no exemplo abaixo:
+
 ```
 http://localhost:3333/notes?title=node&user_id=1&tags=node
 ```
 
-#### Para testar a funcionalidade que mostra uma nota expecifica, na pasta Notes, faça uma requisição do tipo 'GET' chamada 'Show', com a url: localhost:3333/notes/1. Desta forma você pode ver a nota do usuário 1 (atualize o id de acordo com o user).
+Para testar a funcionalidade que mostra uma nota expecifica, na pasta <b>Notes<b/>, faça uma requisição do tipo <b>'GET'</b> chamada </b>'Show'</b>, com a url: <b>localhost:3333/notes/1</b>. Desta forma você pode ver a nota do usuário 1 (atualize o id de acordo com o user).
 
-#### Para testar a funcionalidade de deletar uma nota, na pasta Notes, faça uma requisição do tipo 'DELETE' chamada 'Delete', com a url: localhost:3333/notes/1. Desta forma você deleta as notas do usuário 1 (atualize o id de acordo com o user).
+Para testar a funcionalidade de deletar uma nota, na pasta <b>Notes</b>, faça uma requisição do tipo <b>'DELETE'</b> chamada <b>'Delete'</b>, com a url: <b>localhost:3333/notes/1</b>. Desta forma você deleta as notas do usuário 1 (atualize o id de acordo com o user).
 
-#### Para testar a funcionalidade que mostra as tags da nota de um usuário, crie uma pasta Tags, faça uma requisição do tipo 'GET' chamada 'Index', com a url: localhost:3333/tags/1. Desta forma você pode ver as tags do usuário 1 (atualize o id de acordo com o user).
+Para testar a funcionalidade que mostra as tags da nota de um usuário, crie uma pasta <b>Tags</b>, faça uma requisição do tipo <b>'GET'</b> chamada <b>'Index'</b>, com a url: <b>localhost:3333/tags/1</b>. Desta forma você pode ver as tags do usuário 1 (atualize o id de acordo com o user).
 
 <a id="Licensa"></a>
 ## 📝 License
