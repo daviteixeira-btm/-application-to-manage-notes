@@ -15,6 +15,9 @@ const uploadConfig = require("./configs/upload");
 // Importando todas as funcionalidades do express
 const express = require("express");
 
+// Aqui importamos a Cross-origin resource sharing, é um compartilhamento de recursos entre origens diferentes
+const cors = require("cors");
+
 // Importação do arquivo index com o conjunto de rotas da API
 const routes = require("./routes");
 
@@ -23,6 +26,9 @@ migrationsRun();
 
 // Iniciando o express
 const app = express();
+
+// Aqui habilitamos para que o back-end consiga atender as requisições do front-end
+app.use(cors());
 
 /* Aqui dizemos para o node que as informações 
 que vão vir no corpo da requisição vão ser em formato de json. */
