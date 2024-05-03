@@ -113,6 +113,8 @@ class NotesController {
             .whereIn("name", filterTags)
             // Aqui conectamos as tabelas de tags e motas pelos ids
             .innerJoin("notes", "notes.id", "tags.note_id")
+            // Agrupando para não trazer notas repetidas
+            .groupBy("notes.id")
             // Ordenamos as notas pelo titulo
             .orderBy("notes.title");
 
