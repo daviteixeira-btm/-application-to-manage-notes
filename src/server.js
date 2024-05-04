@@ -1,5 +1,8 @@
 /* Arquivo que é o ponto de entrada da aplicação pelo servidor */
 
+// Necessario para se ter acesso as variaveis de ambiente
+require("dotenv/config")
+
 // biblioteca para lidar com os erros do servidor e do cliente
 require("express-async-errors");
 
@@ -61,7 +64,7 @@ app.use((error, request, response, next) => {
 });
 
 // Endereço que o express vai atender as requisições
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 
 /* Aqui o express fica observando o endereço e executa a função para 
 saber se ele está rodando e em qual porta ele está */
