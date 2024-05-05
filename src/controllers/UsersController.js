@@ -6,6 +6,9 @@ do usuário. */
 const { hash, compare } = require('bcryptjs')
 const AppError = require('../utils/AppError');
 
+// Importando da logica de usuarios do banco
+const UserRepository = require("../repositories/UserRepository");
+
 // Conexão com o banco de dados
 const sqliteConnection = require('../database/sqlite');
 
@@ -28,11 +31,10 @@ class UsersController {
 
     const { name, email, password } = request.body;
 
-    // faz a conexão com o banco de dados
-    const database = await sqliteConnection();
+    const userRepository = new UserRepository();
 
     // Verifica se o email do usuario já existe
-    const checkUserExists = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
+    const checkUserExists = await userRepository.findByEmail(email);
 
     if (checkUserExists){
       // Excessão caso o usuário exista
@@ -43,10 +45,7 @@ class UsersController {
     const hashedPassword = await hash(password, 8);
 
     // Insere os dados na tabela do usuário
-    await database.run(
-      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-      [name, email, hashedPassword]
-    )
+    await userRepository.create({ name, email, password: hashedPassword});
 
     // Exemplo onde além do retorno de resposta em json, é retornado o status code de 201 para criação.
     return response.status(201).json();
