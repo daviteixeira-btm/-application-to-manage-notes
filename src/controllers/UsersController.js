@@ -9,6 +9,9 @@ const AppError = require('../utils/AppError');
 // Importando da logica de usuarios do banco
 const UserRepository = require("../repositories/UserRepository");
 
+// Importamos nosso serviço de criação de usuário
+const UserCreateService = require("../services/UserCreateService");
+
 // Conexão com o banco de dados
 const sqliteConnection = require('../database/sqlite');
 
@@ -33,19 +36,10 @@ class UsersController {
 
     const userRepository = new UserRepository();
 
-    // Verifica se o email do usuario já existe
-    const checkUserExists = await userRepository.findByEmail(email);
+    // Passamos o userRepository para a classe
+    const userCreateService = new UserCreateService(userRepository);
 
-    if (checkUserExists){
-      // Excessão caso o usuário exista
-      throw new AppError("Este e-mail já está em uso.");
-    }
-
-    // aqui, na função passamos a senha e o salto, que é o fator de complexidade da senha
-    const hashedPassword = await hash(password, 8);
-
-    // Insere os dados na tabela do usuário
-    await userRepository.create({ name, email, password: hashedPassword});
+    await userCreateService.execute({ name, email, password });
 
     // Exemplo onde além do retorno de resposta em json, é retornado o status code de 201 para criação.
     return response.status(201).json();
