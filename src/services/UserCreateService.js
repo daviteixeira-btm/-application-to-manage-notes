@@ -24,7 +24,9 @@ class UserCreateService {
         const hashedPassword = await hash(password, 8);
 
         // Insere os dados na tabela do usuário
-        await this.userRepository.create({ name, email, password: hashedPassword});
+        const userCreated = await this.userRepository.create({ name, email, password: hashedPassword});
+
+        return userCreated;
     }
 }
 
